@@ -38,18 +38,12 @@ bool Maze::load(const string &fileName) {
   inFile >> width >> height;
   inFile >> exitRow >> exitColumn;
   inFile >> startRow >> startColumn;
-  // set maze size
-  field.resize(height);
-  for (auto &rowVector : field) {
-    rowVector.resize(width);
-  }
   // ignore leftover charcaters up to newline
   inFile.ignore(INT_MAX, '\n');
+  string line;
   for (int row = 0; row < height; ++row) {
-    for (int col = 0; col < width; ++col) {
-      inFile.get(field[row][col]);
-    }
-    inFile.ignore(INT_MAX, '\n');
+       getline(inFile, line);
+       field.push_back(line);
   }
   return true;
 }

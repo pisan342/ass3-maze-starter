@@ -33,7 +33,7 @@ private:
   string path;
 
   // array to hold the maze structure
-  vector<vector<char>> field;
+  vector<string> field;
 
   // width and height of maze
   int width{0}, height{0};
