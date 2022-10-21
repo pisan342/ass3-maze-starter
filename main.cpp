@@ -5,18 +5,18 @@
 using namespace std;
 
 void test(const string &mazeFile) {
-  Maze m;
+  Maze myMaze;
   cout << "*** Solving " << mazeFile << endl;
-  if (!m.load(mazeFile)) {
+  if (!myMaze.load(mazeFile)) {
     cerr << "Failed to load " << mazeFile << endl;
     return;
   }
-  if (m.solve()) {
+  if (myMaze.solve()) {
     cout << "Path: " << m.getPath() << endl;
   } else {
     cout << "Failed to solve: " << mazeFile << endl;
   }
-  cout << m << endl;
+  cout << myMaze << endl;
 }
 
 // accepts multiple maze files from command line

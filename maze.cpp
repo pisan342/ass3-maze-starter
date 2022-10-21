@@ -31,7 +31,7 @@ Maze::Maze() = default;
 bool Maze::load(const string &fileName) {
   ifstream inFile;
   inFile.open(fileName);
-  if (!inFile) {
+  if (inFile == 0) {
     cerr << "Unable to open file: " << fileName << endl;
     return false;
   }
