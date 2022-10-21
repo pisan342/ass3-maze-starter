@@ -4,13 +4,11 @@
 # Basedon information from
 # https://github.com/mapbox/cpp/blob/master/docs/coverage.md
 
+PROG=$0
+EXE="./a.out-code-coverage"
 # How we want to call our executable, 
 # possibly with some command line parameters
 EXEC_PROGRAM="./a.out maze0.txt maze1.txt maze2.txt maze3.txt badfile.txt"
-
-######################################################################
-PROG=$0
-EXE="a.out"
 PROFDATA=$EXE.profdata
 CC=clang++
 
@@ -43,17 +41,10 @@ llvm-profdata merge default.profraw -output=$PROFDATA
 
 if [ ! -f $PROFDATA ]; then
     echo "ERROR: $PROG: Failed to create $PROFDATA"
-    exit 1
-fi
-
-
-# GitHub actions do not have demangler program
-if hash llvm-cxxfilt 2>/dev/null; then
-    llvm-cov report -show-functions=1 -Xdemangler=llvm-cxxfilt $EXE -instr-profile=$PROFDATA *.cpp
 else
-    llvm-cov report -show-functions=1 $EXE -instr-profile=$PROFDATA *.cpp
+    llvm-cov report -show-functions=1 -Xdemangler=llvm-cxxfilt $EXE -instr-profile=$PROFDATA *.cpp
+    
+    llvm-cov show $EXE -instr-profile=$PROFDATA
 fi
 
-llvm-cov show $EXE -instr-profile=$PROFDATA
-
-rm $EXE $PROFDATA default.profraw 2>/dev/null
+rm -rf a.out* $EXE $PROFDATA default.profraw 2>/dev/null

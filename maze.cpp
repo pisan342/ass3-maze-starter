@@ -42,8 +42,8 @@ bool Maze::load(const string &fileName) {
   inFile.ignore(INT_MAX, '\n');
   string line;
   for (int row = 0; row < height; ++row) {
-       getline(inFile, line);
-       field.push_back(line);
+    getline(inFile, line);
+    field.push_back(line);
   }
   return true;
 }
