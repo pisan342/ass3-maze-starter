@@ -12,7 +12,7 @@ void test(const string &mazeFile) {
     return;
   }
   if (myMaze.solve()) {
-    cout << "Path: " << m.getPath() << endl;
+    cout << "Path: " << myMaze.getPath() << endl;
   } else {
     cout << "Failed to solve: " << mazeFile << endl;
   }

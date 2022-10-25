@@ -31,8 +31,11 @@ Maze::Maze() = default;
 bool Maze::load(const string &fileName) {
   ifstream inFile;
   inFile.open(fileName);
-  if (inFile == 0) {
+  if (!inFile.is_open()) {
     cerr << "Unable to open file: " << fileName << endl;
+    // next line is just to satisfy clang-tidy
+    // otherwise it complains saying function can be const
+    width = height = 0;
     return false;
   }
   inFile >> width >> height;
